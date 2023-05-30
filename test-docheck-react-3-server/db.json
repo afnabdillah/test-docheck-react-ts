@@ -1,0 +1,32 @@
+{
+  "toDoList": [
+    {
+      "id": 1,
+      "note": "Aku mau jogging dengan target 5 km",
+      "date": "2023-05-26",
+      "cardColor": "#4888f0",
+      "isChecked": false
+    },
+    {
+      "id": 2,
+      "note": "Aku mau pergi ke Central Park dengan teman",
+      "date": "2023-05-27",
+      "cardColor": "#0ddea3",
+      "isChecked": false
+    },
+    {
+      "id": 3,
+      "note": "Aku mau mendaki gunung",
+      "date": "2023-05-28",
+      "cardColor": "#45e30b",
+      "isChecked": false
+    },
+    {
+      "id": 4,
+      "note": "Aku mau wawancara di DoCheck",
+      "date": "2023-05-29",
+      "cardColor": "#f56469",
+      "isChecked": false
+    }
+  ]
+}

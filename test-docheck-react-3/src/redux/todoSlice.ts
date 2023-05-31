@@ -2,8 +2,8 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { CheckToDo, NewToDo, ToDo } from "../typeDefinitons";
 
-const base_url = "http://localhost:3000";
-// const base_url = "https://my-json-server.typicode.com/afnabdillah/test-docheck-server";
+// const base_url = "http://localhost:3000";
+const base_url = "https://my-json-server.typicode.com/afnabdillah/test-docheck-server";
 
 export const fetchToDos = createAsyncThunk(
   "todos/fetchToDos",
@@ -114,7 +114,6 @@ interface ToDosState {
 
 const todoSlice = createSlice({
   name: "todos",
-  // `createSlice` will infer the state type from the `initialState` argument
   initialState: {
     todos: [],
     status: {

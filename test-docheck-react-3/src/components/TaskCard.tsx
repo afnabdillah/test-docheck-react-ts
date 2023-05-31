@@ -12,7 +12,6 @@ function TaskCard({ todo, index }: { todo: ToDo, index: number }): ReactElement 
   const handleCheckNote = () => {
     checkNote(todo.id, todo.isChecked, index)
       .then(() => {
-        // setChecked(!checked);
         MyToast.fire({
           icon: "success",
           text: `Your note has been ${
@@ -62,7 +61,7 @@ function TaskCard({ todo, index }: { todo: ToDo, index: number }): ReactElement 
   return (
     <div
       style={{ backgroundColor: todo.cardColor }}
-      className={`w-64 aspect-square rounded-xl p-4 flex flex-col shadow-xl`}
+      className={`w-64 aspect-square rounded-xl p-4 flex flex-col shadow-xl mb-8`}
     >
       <div className="flex justify-start items-center">
         <p className={todo.isChecked? "line-through" : ""}>

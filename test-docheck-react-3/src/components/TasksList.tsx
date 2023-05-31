@@ -1,17 +1,15 @@
 import { ReactElement, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks";
-import TaskCard from "./TaskCard";
 import { fetchToDos } from "../redux/todoSlice";
+import TaskCard from "./TaskCard";
 
 function TasksList(): ReactElement {
-  
+
   const dispatch = useAppDispatch();
 
   const todoList = useAppSelector((state) => state.todosReducer.todos);
 
-  const loadingStatus = useAppSelector(
-    (state) => state.todosReducer.status.todos
-  );
+  const loadingStatus = useAppSelector((state) => state.todosReducer.status.todos);
 
   useEffect(() => {
     dispatch(fetchToDos());
@@ -36,10 +34,10 @@ function TasksList(): ReactElement {
           <p className=" text-gray-700">Results not found.</p>
         </div>
       ) : (
-        <div className="grid grid-cols-4 gap-4 min-[300px]:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {todoList.map((el) => {
+        <div className="grid gap-4 min-[300px]:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {todoList.map((el, index) => {
             const { id }: { id: number } = el;
-            return <TaskCard key={id} todo={el} />;
+            return <TaskCard key={id} todo={el} index={index} />;
           })}
         </div>
       )}

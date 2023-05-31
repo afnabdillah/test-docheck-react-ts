@@ -1,17 +1,23 @@
 import { useState } from "react";
+import { useContext } from "react";
 import { NewToDo, ToDoHook } from "../typeDefinitons";
 import { useAppDispatch } from "./reduxHooks";
-import { checkToDo, deleteToDo, postNewToDo } from "../redux/todoSlice";
-// import { SearchContext } from "../context/searchContext";
+import {
+  checkToDo,
+  deleteToDo,
+  postNewToDo,
+  fetchToDos,
+} from "../redux/todoSlice";
+import { SearchContext } from "../context/searchContext";
 
 export default function useToDo(): ToDoHook {
-
-  // const context = useContext(SearchContext);
+  
+  const context = useContext(SearchContext);
 
   const [isLoading, setLoading] = useState(false);
 
   const dispatch = useAppDispatch();
-  
+
   const colors: string[] = [
     "#f56469",
     "#f0b81f",
@@ -22,49 +28,53 @@ export default function useToDo(): ToDoHook {
     "#ed7be0",
     "#4888f0",
     "#e6e619",
-    "#fccf03"
-  ]
+    "#fccf03",
+  ];
 
   const postNote = async (data: NewToDo): Promise<void> => {
     try {
       setLoading(!isLoading);
-      data.cardColor = colors[Math.floor(Math.random()*colors.length)];
+      data.cardColor = colors[Math.floor(Math.random() * colors.length)];
+      data.isChecked = false;
       await dispatch(postNewToDo(data)).unwrap();
       // Re-fetching is disabled temporarily to allow mocking of adding notes
-      // await dispatch(fetchToDos()).unwrap();
+      await dispatch(fetchToDos()).unwrap();
       setLoading(!isLoading);
-    } catch(err) {
+    } catch (err) {
       console.log(err);
       setLoading(!isLoading);
     }
   };
 
-  const checkNote = async (id: number, isChecked: boolean): Promise<void> => {
+  const checkNote = async (
+    id: number,
+    isChecked: boolean,
+    index: number
+  ): Promise<void> => {
     try {
       setLoading(!isLoading);
-      await dispatch(checkToDo({id, isChecked})).unwrap();
+      await dispatch(checkToDo({ id, isChecked, index })).unwrap();
       // Re-fetching is disabled temporarily to allow mocking of checking notes
-      // await context?.handleSearchTasks();
+      await context?.handleSearchTasks();
       setLoading(!isLoading);
-    } catch(err) {
+    } catch (err) {
       console.log(err);
       setLoading(!isLoading);
     }
-  }
+  };
 
-  const deleteNote = async (id: number): Promise<void> => {
+  const deleteNote = async (id: number, index: number): Promise<void> => {
     try {
       setLoading(!isLoading);
-      await dispatch(deleteToDo(id)).unwrap();
+      await dispatch(deleteToDo({ id, index })).unwrap();
       // Re-fetching is disabled temporarily to allow mocking of deleting notes
-      // await context?.handleSearchTasks();
+      await context?.handleSearchTasks();
       setLoading(!isLoading);
-    } catch(err) {
+    } catch (err) {
       console.log(err);
       setLoading(!isLoading);
     }
-  }
+  };
 
-
-  return {isLoading, postNote, checkNote, deleteNote};
+  return { isLoading, postNote, checkNote, deleteNote };
 }

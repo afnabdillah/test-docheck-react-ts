@@ -11,19 +11,21 @@ export type ToDo = {
 export type NewToDo = {
   note: string,
   date: string | Date,
-  cardColor?: string
+  cardColor?: string,
+  isChecked?: boolean
 }
 
 export type CheckToDo = {
   id: number,
-  isChecked: boolean
+  isChecked: boolean,
+  index: number
 }
 
 export type ToDoHook = {
   isLoading: boolean,
   postNote: (data: NewToDo) => Promise<void>,
-  checkNote: (id: number, isChecked: boolean) => Promise<void> ,
-  deleteNote: (id: number) => Promise<void>
+  checkNote: (id: number, isChecked: boolean, index: number) => Promise<void> ,
+  deleteNote: (id: number, index: number) => Promise<void>
 }
 
 export type SearchContextType = {

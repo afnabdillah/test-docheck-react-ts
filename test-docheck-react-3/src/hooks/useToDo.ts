@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {useContext} from "react";
+import { useContext } from "react";
 import { NewToDo, ToDoHook } from "../typeDefinitons";
 import { useAppDispatch } from "./reduxHooks";
 import {
@@ -11,7 +11,7 @@ import {
 import { SearchContext } from "../context/searchContext";
 
 export default function useToDo(): ToDoHook {
-
+  
   const context = useContext(SearchContext);
 
   const [isLoading, setLoading] = useState(false);
